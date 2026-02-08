@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>San Valentín</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+
+      /* Fondo degradado por defecto */
+      background: linear-gradient(135deg, #ff99cc, #ff4d6d);
+
+      /* Opción para usar una imagen como fondo */
+      background-image: url("kitty.png"); /* Cambia "fondo.png" por el nombre de tu imagen */
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-attachment: fixed;
+      background-size: cover;
+
+      color: #000; /* Texto negro */
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+    h1, h2, .nubecita, #respuesta {
+      background: rgba(255,255,255,0.7); /* Fondo blanco semitransparente */
+      padding: 10px;
+      border-radius: 10px;
+    }
+    h1 {
+      margin-bottom: 10px;
+      z-index: 1;
+    }
+    h2 {
+      font-size: 20px;
+      margin-bottom: 20px;
+      opacity: 0;
+      animation: fadePulse 3s ease-in-out forwards;
+      z-index: 1;
+    }
+    .nubecita {
+      background: rgba(255,255,255,0.8);
+      color: #000000;
+      font-weight: bold;
+      padding: 15px 25px;
+      border-radius: 30px;
+      font-size: 22px;
+      margin-bottom: 40px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      border: 2px solid #ccc;
+      animation: fadePulse 3s ease-in-out forwards;
+      z-index: 1;
+    }
+    @keyframes fadePulse {
+      0% { opacity: 0; transform: scale(0.9); }
+      50% { opacity: 1; transform: scale(1.05); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+    button {
+      padding: 15px 30px;
+      margin: 15px;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.2s;
+      z-index: 1;
+    }
+    button:hover {
+      transform: scale(1.1);
+    }
+    #yesBtn {
+      background-color: purple;
+      color: #fff;
+    }
+    #noBtn {
+      background-color: #333;
+      color: #fff;
+      position: absolute;
+    }
+    #respuesta {
+      margin-top: 30px;
+      font-size: 22px;
+      font-weight: bold;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+  <h1>Hey Cohinita 💌</h1>
+  <h2>Tu Cochinito tiene una pregunta para tu </h2>
+  <div class="nubecita">¿Quieres ser Mi San Valentín?</div>
+  <div>
+    <button id="yesBtn">Sí</button>
+    <button id="noBtn">No</button>
+  </div>
+  <p id="respuesta"></p>
+
+  <script>
+    const yesBtn = document.getElementById("yesBtn");
+    const noBtn = document.getElementById("noBtn");
+    const respuesta = document.getElementById("respuesta");
+
+    const frasesNo = [
+      "Ups... Creo que no tienes alternativa 😌💘",
+      "Ese 'No' suena mucho a 'Sí' 😏💜",
+      "Jajaja, ni lo intentes... ¡es un Sí! 💕",
+      "Tu corazón ya decidió, y es un Sí 😻",
+      "No existe el 'No' aquí, solo amor 💌",
+      "Ush cuanto mas piensas resisterte preciosa 🙄",
+      "Andale Mi niña, picale al si 🥺🙏🏻",
+      "No quieres ser mi San Valentin?? 😭"
+    ];
+    let indiceNo = 0;
+
+    // Redirigir al presionar "Sí"
+    yesBtn.addEventListener("click", () => {
+      window.location.href = "sanvalentin2.html"; 
+    });
+
+    // Cambiar frases y mover botón "No"
+    noBtn.addEventListener("click", () => {
+      respuesta.textContent = frasesNo[indiceNo];
+      indiceNo = (indiceNo + 1) % frasesNo.length;
+
+      const maxX = window.innerWidth - 100;
+      const maxY = window.innerHeight - 100;
+      const randomX = Math.floor(Math.random() * maxX);
+      const randomY = Math.floor(Math.random() * maxY);
+      const randomScale = 0.8 + Math.random() * 1.5;
+
+      noBtn.style.left = randomX + "px";
+      noBtn.style.top = randomY + "px";
+      noBtn.style.transform = `scale(${randomScale})`;
+    });
+  </script>
+</body>
+</html>
